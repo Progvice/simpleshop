@@ -1,0 +1,17 @@
+:root {
+  --header-bg: #232323;
+  --black-color: #232323;
+  --blue-color: #1073e4;
+  --header-height: 60px;
+}
+
+h1, h2, h3, h4, h5, h6, a, p {
+  font-family: 'OpenSans';
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/*# sourceMappingURL=main.css.map */
