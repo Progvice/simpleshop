@@ -3,9 +3,7 @@ export default defineEventHandler(async (e) => {
     
     const access_token : any = getCookie(e, 'access_token'); // If token is empty then backend will generate new token from refresh token
     const refresh_token : any = getCookie(e, 'refresh_token');
-
     const data = await readBody(e);
-    console.log(data);
     if(typeof refresh_token === 'string') {
         const authHeader = `Bearer ${access_token}`;
         const createCategory = await $fetch.raw('http://localhost/admin/category/create', {

@@ -1,11 +1,13 @@
 <template>
     <header>
+        <h1><NuxtLink to="/">Verkkokauppa</NuxtLink></h1>
         <nav>
             <ul>
                 <li><NuxtLink to="/">Home</NuxtLink></li>
                 <li><NuxtLink to="/about">About</NuxtLink></li>
                 <li><NuxtLink to="/login">Login</NuxtLink></li>
                 <li><NuxtLink to="/category/create">Luo kategoria</NuxtLink></li>
+                <li><NuxtLink to="/category">Kategoriat</NuxtLink></li>
             </ul>
         </nav>
     </header>
@@ -22,13 +24,21 @@ export default {
         position: fixed;
         top: 0;
         left:0;
-        width: 100%;
+        width: calc(100% - 40px);
+        padding: 0 20px;
         height: var(--header-height);
         background-color: var(--header-bg);
+        z-index: 9999;
+        display: flex;
+        align-items:center;
+        justify-content: space-between;
+    }
+    header h1 a {
+        color: var(--blue-color);
     }
     header nav {
         position: relative;
-        width: 100%;
+        display: flex;
         height: var(--header-height)
     }
     header nav ul {

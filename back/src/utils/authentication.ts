@@ -245,9 +245,9 @@ const Run = async (req: Request) : Promise<AuthObject> => {
         };
     }
     // If token is expired/invalid then we will try to create new access token based on refresh token.
-
     const newAccessToken : object = await CreateAccessToken(refresh_token);
 
+    // If creating new token fails then server will tell client that session has expired
     if('status' in newAccessToken) {
         if(!newAccessToken.status) {
             return {
@@ -315,6 +315,7 @@ const CheckPermission = async (permName : string, token: string) : Promise<boole
  */
 const CheckAuthAndPerm = async (req: Request, res: Response, perm : string) : Promise<AuthAndPerm> => {
     const checkAuth = await Run(req);
+    console.log(checkAuth);
     if(!checkAuth.status) {
         return {
             status: false,
@@ -327,6 +328,9 @@ const CheckAuthAndPerm = async (req: Request, res: Response, perm : string) : Pr
             msg: 'invalidtoken'
         };
     }
+    if(checkAuth.msg === 'tokenrenewed') {
+        res.set('token', checkAuth.token);
+    }
     const permCheck : boolean = await CheckPermission(perm, checkAuth.token);
     if(!permCheck) {
         return {
@@ -334,8 +338,6 @@ const CheckAuthAndPerm = async (req: Request, res: Response, perm : string) : Pr
             msg: 'unauthorizedaccess'
         };
     }
-    // We set this so Nuxi server can set new cookie.
-    res.set('token', checkAuth.token);
     return {
         status: true,
         msg: 'OK!'

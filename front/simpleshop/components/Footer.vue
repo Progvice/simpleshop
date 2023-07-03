@@ -18,5 +18,6 @@ export default {
         width: 100%;
         height: 60px;
         background-color: var(--header-bg);
+        z-index: 9999;
     }
 </style>

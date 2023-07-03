@@ -13,5 +13,24 @@ html, body {
   margin: 0;
   padding: 0;
 }
+a {
+  text-decoration: none;
+}
+input {
+  height: 40px;
+}
+.main {
+  margin-top: var(--header-height);
+  display: flex;
+  width: calc(100% - 40px);
+  padding: 0 20px;
+  min-height: calc(100vh - var(--header-height));
+  flex-direction: column;
+}
+.main > h1 {
+  text-transform: uppercase;
+  text-align: center;
+
+}
 
 /*# sourceMappingURL=main.css.map */
