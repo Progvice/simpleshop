@@ -1,11 +1,26 @@
 import mongoose, { Schema } from 'mongoose';
 
-import Category from './Category';
+import CategoryModel from './Category';
+const Category = mongoose.model('Category', CategoryModel);
 
 const Product = new Schema({
-    sku: {},
-    product_img: {
-        type: [],
+    sku: {
+        index: {
+            unique: true
+        },
+        type: String,
+    },
+    product_main_img: {
+        type: String,
+        default: [
+            '/img/default_product.jpg'
+        ]
+    },
+    product_imgs: {
+        type: [String],
+        default: [
+            '/img/default_product.jpg'
+        ]
     },
     product_name: {
         type: String,
@@ -18,6 +33,10 @@ const Product = new Schema({
         },
         required: [true, 'nameurlrequired']
     },
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: 'Category'
+    },
     short_desc: {
         type: String,
         maxlength: 255
@@ -29,9 +48,6 @@ const Product = new Schema({
         type: Number,
         min: [1, 'toolowprice'],
         max: [10000000, 'toohighprice'] // Value is 10 million. Price is measured in cents.
-    },
-    category: {
-        type: [Category]
     }
 });
 

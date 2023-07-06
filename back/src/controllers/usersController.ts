@@ -4,11 +4,15 @@ import config from '../config.json';
 import { Request, Response } from 'express';
 
 import connect from '../db.connect';
-
+// MongoDB connect
 connect.MongoDB();
 
+// MODELS
 import UserModel from '../models/User';
 const User : Model<any> = mongoose.model('user', UserModel);
+
+// UTILS
+import Auth from '../utils/authentication';
 
 /**
  * Function for creating new user. It does check bunch of things and if all the requirements are met
@@ -143,4 +147,21 @@ const readUser = (req: Request, res: Response) => {
 const updateUser = () => {}
 const deleteUser = () => {}
 
-export default { readUser, updateUser, deleteUser, createUser };
+const authUser = async (req: Request, res: Response) => {
+    const checkToken = await Auth.Run(req);
+    if(!checkToken.status) {
+        res.json({
+            status: false,
+            msg: checkToken.msg
+        });
+        return;
+    }
+    if('token' in checkToken) {
+        res.set('token', checkToken.token);
+        res.json({
+            status: true,
+            msg: checkToken.msg
+        });
+    }
+}
+export default { readUser, updateUser, deleteUser, createUser, authUser };

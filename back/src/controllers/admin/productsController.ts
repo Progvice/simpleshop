@@ -19,4 +19,7 @@ const Category : Model<any> = mongoose.model('category', CategoryModel);
  * @returns {void}
  */
 const readProduct = async (req: Request, res: Response) => {}
+const addProduct = async (req: Request, res: Response) => {
+    
+}
 export default {readProduct};

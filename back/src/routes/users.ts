@@ -17,4 +17,5 @@ router.post('/create', jsonParser, usersController.createUser);
 router.get('/id/:id', usersController.readUser);
 router.put('/update/:id', jsonParser, usersController.updateUser);
 router.delete('/delete/:id', jsonParser, usersController.deleteUser);
+router.post('/auth', jsonParser, usersController.authUser);
 export default router;

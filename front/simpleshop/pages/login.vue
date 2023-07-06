@@ -62,7 +62,7 @@ const sendLogin = async (e) => {
 .authform form input {
     width: calc(90% - 6px);
     margin-top: 10px;
-    padding: 10px 0 10px 5px;
+    padding: 0 0 0 5px;
 }
 .authform form button {
     margin: 10px 0;
